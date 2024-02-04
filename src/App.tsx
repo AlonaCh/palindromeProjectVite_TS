@@ -9,8 +9,8 @@ import "./App.css";
   };
 
   function palindrome(): string {
-    let string: string = String(searchValue).toLowerCase().replace(/\s/g, '');
-    let reverseString = string.split('').reverse().join('');
+    let string:string = searchValue.toLowerCase().replace(/\s/g, '');
+    let reverseString:string = string.split('').reverse().join('');
     if (searchValue === "") {
       return "";
     } else if (string === reverseString) {
