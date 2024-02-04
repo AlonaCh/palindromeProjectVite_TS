@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+ function App() {
+  const [searchValue, setSearchValue] = useState<string>("");
+
+  function searchHandler(event:React.ChangeEvent<HTMLInputElement>): void {
+    setSearchValue(event.target.value);
+  };
+
+  function palindrome(): string {
+    let string: string = String(searchValue).toLowerCase().replace(/\s/g, '');
+    let reverseString = string.split('').reverse().join('');
+    if (searchValue === "") {
+      return "";
+    } else if (string === reverseString) {
+      return "This is palindrome!"
+    } else {
+      return "This is not palindrome!"
+    }
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container">
+        <div className="inputValue">
+          <h1>Palindrome checker App</h1>
+          <input id="search"
+            type="text"
+            value={searchValue}
+            placeholder="Enter word or number" onChange={searchHandler} />
+          <p>{palindrome()}</p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
